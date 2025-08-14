@@ -1,230 +1,262 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hope Platform — فرش دستبافت</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Hope Platform — فرش دستبافت (Demo)</title>
 
-  <!-- Inline CSS for a single-file deploy -->
-  <style>
-    :root{
-      --accent:#4c1d95;
-      --gold:#f59e0b;
-      --muted:#6b7280;
-      --bg:#fffaf6;
-      --card-bg:#ffffff;
-      --radius:12px;
-      font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#111;line-height:1.5}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1100px;margin:0 auto;padding:20px}
-    header{background:var(--card-bg);border-bottom:1px solid #eee;position:sticky;top:0;z-index:40}
-    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
-    .brand{font-weight:700;color:var(--accent);font-size:20px}
-    nav a{margin-left:18px;color:var(--muted);font-size:14px}
-    .hero{height:420px;background-image:url('https://images.unsplash.com/photo-1606868097395-1d8d6f1b6b2f?q=80&w=1600&auto=format&fit=crop');background-size:cover;background-position:center;display:flex;align-items:center}
-    .hero-inner{background:linear-gradient(90deg, rgba(255,255,255,0.92), rgba(255,255,255,0.6));padding:28px;border-radius:12px;margin-left:20px;max-width:620px}
-    .hero h1{font-size:30px;margin:0 0 8px}
-    .hero p{color:var(--muted);margin:0 0 12px}
-    .btn{display:inline-block;background:var(--accent);color:white;padding:10px 16px;border-radius:8px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:22px}
-    .card{background:var(--card-bg);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,42,0.05)}
-    .features img{width:100%;height:160px;object-fit:cover;border-radius:10px}
-    .section-title{font-size:20px;margin:8px 0 12px}
-    .product-card img{width:100%;height:180px;object-fit:cover;border-radius:8px}
-    .price{color:var(--gold);font-weight:700}
-    footer{background:var(--accent);color:white;padding:20px;margin-top:30px;border-top-left-radius:12px;border-top-right-radius:12px}
-    .mini{font-size:13px;color:var(--muted)}
-    /* responsive */
-    @media (max-width:900px){
-      .hero{height:360px}
-      .hero-inner{margin:12px}
-      .header-inner{padding:10px}
-    }
-  </style>
+<!-- Google font (fallbacks included) -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#fbfaf8;
+  --card:#ffffff;
+  --accent:#2b2b6b; /* deep indigo */
+  --accent-2:#c77b00; /* warm gold */
+  --muted:#6b7280;
+  --glass: rgba(255,255,255,0.7);
+  --radius:14px;
+  --shadow: 0 8px 20px rgba(20,30,60,0.08);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Roboto', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg,#fbfaf8 0%, #fff 60%);
+  color:#111;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  direction:rtl;
+}
+
+/* Container */
+.container{max-width:1200px;margin:0 auto;padding:22px}
+
+/* Header */
+.header{
+  position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
+  backdrop-filter: blur(6px); border-bottom:1px solid rgba(2,6,23,0.04);
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 24px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{
+  width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#4b2f9e);
+  display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;box-shadow:0 6px 18px rgba(75,47,158,0.2)
+}
+.brand h1{margin:0;font-size:18px;}
+.nav{display:flex;gap:14px;align-items:center}
+.nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:10px;font-weight:500}
+.nav a:hover{background:rgba(75,47,158,0.06);color:var(--accent)}
+.header-actions{display:flex;gap:8px;align-items:center}
+.btn{background:var(--accent);color:white;padding:9px 14px;border-radius:10px;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(43,43,107,0.12)}
+.btn.ghost{background:transparent;border:1px solid rgba(43,43,107,0.08);color:var(--accent)}
+
+/* Hero with carousel/parallax */
+.hero{height:460px;display:flex;align-items:center;border-radius:16px;margin-top:18px;overflow:hidden;position:relative}
+.hero .slides{position:absolute;inset:0;display:flex;transition:transform 0.9s cubic-bezier(.2,.9,.2,1)}
+.slide{min-width:100%;height:100%;background-size:cover;background-position:center;transform-origin:center;filter:brightness(0.9)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg, rgba(255,255,255,0.95) 5%, rgba(255,255,255,0.25) 45%);display:flex;align-items:center}
+.hero-content{padding:36px;max-width:640px}
+.kicker{font-size:13px;color:var(--muted);margin-bottom:6px}
+.hero h2{margin:0;font-size:34px;color:var(--accent)}
+.hero p{color:var(--muted);margin-top:8px;line-height:1.5}
+.hero-cta{margin-top:16px;display:flex;gap:10px}
+
+/* small carousel dots */
+.dots{position:absolute;left:22px;bottom:18px;display:flex;gap:8px;z-index:40}
+.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.6);box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+.dot.active{background:var(--accent-2);transform:scale(1.2)}
+
+/* Main grid layout */
+.grid-3{display:grid;grid-template-columns:1fr 420px;gap:22px;margin-top:20px}
+.left{}
+
+/* Card styles */
+.card{background:var(--card);border-radius:12px;padding:16px;box-shadow:var(--shadow);overflow:hidden}
+.section-title{font-size:18px;color:var(--accent);margin-bottom:10px;font-weight:600}
+
+/* Artisans showcase */
+.artisan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.artisan{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .25s}
+.artisan img{width:100%;height:220px;object-fit:cover;display:block;transition:transform .5s}
+.artisan:hover img{transform:scale(1.05)}
+.artisan .meta{position:absolute;left:12px;bottom:12px;background:linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.15));padding:10px;border-radius:10px;color:white;backdrop-filter: blur(4px)}
+.artisan .meta h4{margin:0;font-size:15px}
+.artisan .meta p{margin:4px 0 0;font-size:13px;color:rgba(255,255,255,0.9)}
+
+/* Products */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.product{border-radius:12px;overflow:hidden;position:relative;cursor:pointer}
+.product img{width:100%;height:200px;object-fit:cover;display:block}
+.product .pmeta{padding:12px;background:linear-gradient(0deg, rgba(255,255,255,0.9), rgba(255,255,255,0.9))}
+.product h4{margin:4px 0}
+.price{color:var(--accent-2);font-weight:700}
+
+/* small pills */
+.pill{display:inline-block;background:rgba(43,43,107,0.06);color:var(--accent);padding:6px 8px;border-radius:8px;font-size:12px;margin-left:6px}
+
+/* QC / Guarantee flow */
+.flow{display:flex;gap:14px;align-items:center;justify-content:space-between}
+.step{flex:1;background:linear-gradient(180deg,#fff,#faf9ff);border-radius:12px;padding:14px;text-align:center;border:1px solid rgba(2,6,23,0.03)}
+.step .num{width:44px;height:44px;border-radius:44px;background:var(--accent);color:white;display:inline-flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:8px}
+.step p{color:var(--muted);font-size:13px}
+
+/* Cart floating */
+.cart-floating{position:fixed;left:18px;bottom:18px;background:var(--card);padding:10px 12px;border-radius:12px;box-shadow:0 8px 20px rgba(20,30,60,0.09);z-index:80}
+.cart-floating button{background:var(--accent);color:white;padding:8px 12px;border-radius:10px;border:none}
+
+/* Footer */
+footer{margin-top:40px;padding:36px 0;color:var(--muted)}
+
+/* Modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(3,6,23,0.45);display:flex;align-items:center;justify-content:center;z-index:200}
+.modal{width:95%;max-width:980px;background:var(--card);border-radius:14px;padding:18px;box-shadow:0 20px 60px rgba(2,6,23,0.2);max-height:86vh;overflow:auto}
+
+/* Responsive */
+@media (max-width:1000px){
+  .grid-3{grid-template-columns:1fr;gap:18px}
+  .artisan-grid{grid-template-columns:repeat(2,1fr)}
+  .products-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:640px){
+  .artisan-grid{grid-template-columns:1fr}
+  .products-grid{grid-template-columns:1fr}
+  .hero h2{font-size:22px}
+  .hero p{font-size:14px}
+  .hero{height:360px}
+}
+</style>
 </head>
 <body>
-  <header>
-    <div class="container header-inner">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div style="width:44px;height:44px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">HP</div>
-        <div>
-          <div class="brand">Hope Platform</div>
-          <div style="font-size:12px;color:var(--muted)">فرش دستبافت — سفارشی، اصیل، تضمین‌شده</div>
-        </div>
-      </div>
 
-      <nav>
-        <a href="#shop">فروشگاه</a>
-        <a href="#artisans">بافندگان</a>
-        <a href="#education">آموزش</a>
-        <a href="#contact">تماس</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="container hero-inner">
-      <h1>فرش دستباف، مستقیم از هنرمند به خانهٔ شما</h1>
-      <p>سفارش‌سازی کامل، تضمین کیفیت، کارگاه‌های آموزشی در ونکوور و دبی — با Hope Platform به داستانِ هر گره وصل شوید.</p>
-      <div style="margin-top:12px">
-        <a class="btn" href="#shop">گشت در فروشگاه</a>
-        <a class="btn" style="background:transparent;border:1px solid var(--accent);color:var(--accent);margin-right:10px" href="#education">ثبت‌نام در کارگاه</a>
+<!-- Header -->
+<header class="header">
+  <div class="container header-inner">
+    <div class="brand">
+      <div class="logo">HP</div>
+      <div>
+        <h1>Hope Platform</h1>
+        <div style="font-size:12px;color:var(--muted)">فرش دستبافت — سفارشی، اصالت‌دار، تضمین‌شده</div>
       </div>
     </div>
-  </section>
 
-  <main class="container" style="margin-top:20px">
+    <nav class="nav" aria-label="منو">
+      <a href="#shop">فروشگاه</a>
+      <a href="#artisans">بافندگان</a>
+      <a href="#guarantee">تضمین کیفیت</a>
+      <a href="#education">آموزش</a>
+      <a class="btn" id="cta-register">ثبت‌نام</a>
+    </nav>
 
-    <section class="card features">
-      <div style="display:flex;gap:14px;align-items:center">
-        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop" alt="بافنده در حال بافت" />
-        <div>
-          <div class="section-title">چرا Hope Platform؟</div>
-          <ul style="margin:0;padding-inline-start:18px;color:var(--muted)">
-            <li>پروفایل شفاف هر بافنده، تصاویر واقعی و گواهی کنترل کیفیت</li>
-            <li>سفارش‌سازی نقشه، رنگ، سایز و درجِ نام یا لوگو</li>
-            <li>برنامه‌های آموزشی حضوری و Guarantee-to-Buy برای هنرجویان</li>
-            <li>ارسال بین‌المللی با بیمه و پیگیری کامل</li>
-          </ul>
-        </div>
+    <div class="header-actions">
+      <a class="btn ghost" id="btn-profile">ورود</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero carousel / parallax -->
+<section class="hero container">
+  <div class="slides" id="slides">
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1602524811619-7b6f3f9b7c08?q=80&w=1600&auto=format&fit=crop');"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop');"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1622636491706-7f8d0f9cd0a8?q=80&w=1600&auto=format&fit=crop');"></div>
+  </div>
+
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <div class="kicker">داستان و هنر از دلِ بافندگان</div>
+      <h2>فرش دستباف سفارشی — از بافنده تا خانهٔ شما</h2>
+      <p>سفارش‌سازی کامل، مشاهدهٔ شفافِ پروفایلِ بافنده، تضمین کیفیت مرحله‌ای و کارگاه‌های آموزشی حضوری در ونکوور و دبی.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#shop">همین حالا خرید کن</a>
+        <a class="btn ghost" href="#education">رزرو کارگاه</a>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <section id="shop" style="margin-top:22px">
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <div class="section-title">فروشگاه — نمونه محصولات</div>
-        <div class="mini">فیلتر: اندازه • جنس • زمان آماده‌سازی</div>
-      </div>
+  <div class="dots" id="dots"></div>
+</section>
 
-      <div class="grid" style="margin-top:12px">
-        <div class="card product-card">
-          <img src="https://images.unsplash.com/photo-1622636491706-7f8d0f9cd0a8?q=80&w=800&auto=format&fit=crop" alt="قالی 3x4" />
-          <h3 style="margin-top:8px">قالی دستباف سفارشی — 3×4</h3>
-          <div class="price">$1,200</div>
-          <p class="mini" style="margin-top:6px">سفارش‌سازی کامل — درج نام و انتخاب رنگ‌بندی. ETA: حدود 16–24 هفته.</p>
-          <div style="margin-top:10px">
-            <a class="btn" href="#" onclick="alert('دمو: افزودن به سبد')">افزودن به سبد</a>
-            <a style="margin-right:8px" href="#" onclick="alert('دمو: صفحه جزئیات باز می‌شود')">جزئیات</a>
-          </div>
-        </div>
-
-        <div class="card product-card">
-          <img src="https://images.unsplash.com/photo-1602524811619-7b6f3f9b7c08?q=80&w=800&auto=format&fit=crop" alt="قالیچه وینتیج" />
-          <h3 style="margin-top:8px">قالیچه وینتیج بازسازی‌شده</h3>
-          <div class="price">$450</div>
-          <p class="mini" style="margin-top:6px">قطعهٔ منحصربه‌فرد، مناسب کلکسیون و فضای لوکس. ETA: آماده ارسال.</p>
-          <div style="margin-top:10px">
-            <a class="btn" href="#" onclick="alert('دمو: افزودن به سبد')">افزودن به سبد</a>
-            <a style="margin-right:8px" href="#" onclick="alert('دمو: صفحه جزئیات باز می‌شود')">جزئیات</a>
-          </div>
-        </div>
-
-        <div class="card product-card">
-          <img src="https://images.unsplash.com/photo-1715468413705-5b4f8f39c2c6?q=80&w=800&auto=format&fit=crop" alt="اتاق لوکس" />
-          <h3 style="margin-top:8px">پکیج دکوراسیون لوکس (شامل فرش)</h3>
-          <div class="price">$2,800</div>
-          <p class="mini" style="margin-top:6px">انتخاب‌شده برای پروژه‌های طراحی داخلی لوکس. ETA: 8–12 هفته.</p>
-          <div style="margin-top:10px">
-            <a class="btn" href="#" onclick="alert('دمو: افزودن به سبد')">افزودن به سبد</a>
-            <a style="margin-right:8px" href="#" onclick="alert('دمو: صفحه جزئیات باز می‌شود')">جزئیات</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="artisans" style="margin-top:28px">
+<!-- Main layout -->
+<div class="container grid-3">
+  <div class="left">
+    <!-- Artisans -->
+    <section class="card">
       <div class="section-title">بافندگان منتخب</div>
-      <div class="grid" style="margin-top:10px">
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1542089363-1a3e8bd6f3f7?q=80&w=800&auto=format&fit=crop" alt="بافنده" style="height:160px;object-fit:cover;border-radius:8px" />
-          <h3 style="margin-top:8px">زری احمدی — روستای ماهان</h3>
-          <p class="mini">متخصص نقشه‌های گلستان • 15 سال تجربه • امتیاز مشتری: 4.9</p>
-          <div style="margin-top:10px"><a class="btn" href="#" onclick="alert('دمو: پروفایل بافنده')">مشاهده پروفایل</a></div>
-        </div>
+      <div class="artisan-grid" id="artisanGrid">
+        <!-- cards populated by JS -->
+      </div>
+    </section>
 
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=800&auto=format&fit=crop" alt="بافنده" style="height:160px;object-fit:cover;border-radius:8px" />
-          <h3 style="margin-top:8px">مینا رضایی — خراسان</h3>
-          <p class="mini">مدرس کارگاه ونکوور • 10 سال تجربه • امتیاز مشتری: 4.8</p>
-          <div style="margin-top:10px"><a class="btn" href="#" onclick="alert('دمو: پروفایل بافنده')">مشاهده پروفایل</a></div>
+    <!-- Products -->
+    <section class="card" style="margin-top:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div class="section-title">محصولات منتخب</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <select id="filterType" aria-label="فیلتر" style="padding:8px;border-radius:8px;border:1px solid #eee">
+            <option value="all">همه</option>
+            <option value="ready">آماده ارسال</option>
+            <option value="custom">سفارشی</option>
+          </select>
+          <select id="sortBy" aria-label="مرتب سازی" style="padding:8px;border-radius:8px;border:1px solid #eee">
+            <option value="popular">محبوب</option>
+            <option value="new">جدیدترین</option>
+            <option value="price_low">قیمت ↑</option>
+            <option value="price_high">قیمت ↓</option>
+          </select>
         </div>
+      </div>
 
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1519331379822-8a20f2b142d4?q=80&w=800&auto=format&fit=crop" alt="بافنده" style="height:160px;object-fit:cover;border-radius:8px" />
-          <h3 style="margin-top:8px">حسین ملکی — تبریز</h3>
-          <p class="mini">بازسازی فرش‌های وینتیج • 20 سال تجربه • امتیاز مشتری: 4.7</p>
-          <div style="margin-top:10px"><a class="btn" href="#" onclick="alert('دمو: پروفایل بافنده')">مشاهده پروفایل</a></div>
+      <div class="products-grid" id="productsGrid" style="margin-top:12px">
+        <!-- products inserted by JS -->
+      </div>
+    </section>
+
+    <!-- Guarantee / QC flow -->
+    <section class="card" id="guarantee" style="margin-top:16px">
+      <div class="section-title">فرآیند تضمین کیفیت (QC)</div>
+      <p class="mini" style="color:var(--muted)">هر فرش در سه مرحله کنترل می‌شود تا مشتری و بافنده هر دو از کیفیت و زمانبندی مطمئن شوند.</p>
+      <div style="margin-top:12px" class="flow">
+        <div class="step">
+          <div class="num">1</div>
+          <h4>بازرسی مواد اولیه</h4>
+          <p>پشم/ابریشم و رنگ‌ها توسط تیم QC بررسی و نمونه‌برداری می‌شوند.</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h4>بازرسی میانی</h4>
+          <p>در فواصل مشخص (هر 25٪ پیشرفت) بازرسی تصویری و فنی انجام می‌شود.</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h4>بازرسی نهایی & گواهی</h4>
+          <p>پس از تحویل، تست کیفیت، عکس‌برداری و صدور گواهی دیجیتال اصالت.</p>
         </div>
       </div>
     </section>
 
-    <section id="education" style="margin-top:28px">
-      <div class="section-title">کارگاه‌ها و آموزش‌ها</div>
-      <div class="card" style="display:flex;gap:16px;align-items:center">
-        <img src="https://images.unsplash.com/photo-1581090468128-80a0d7e6b1b3?q=80&w=600&auto=format&fit=crop" alt="کارگاه" style="width:220px;height:140px;object-fit:cover;border-radius:8px" />
-        <div>
-          <h4 style="margin:0 0 6px">دورهٔ 4 هفته‌ای — ونکوور</h4>
-          <div class="mini">شهریه: $300 • ظرفیت: 12 نفر • تضمین خرید اولین اثر به قیمت $700</div>
-          <p style="margin-top:8px;color:var(--muted)">پس از اتمام دوره، هنرجو می‌تواند از دار قالی و مواد اولیه ما استفاده کند و اولین فرشش را به قیمت تضمینی به پلتفرم بفروشد — تجربه‌ای که هم درآمد و هم مهارت می‌دهد.</p>
-          <div style="margin-top:10px"><a class="btn" href="#" onclick="alert('دمو: رزرو دوره')">رزرو دوره</a></div>
-        </div>
-      </div>
-    </section>
+  </div>
 
-    <section id="contact" style="margin-top:28px">
-      <div class="section-title">تماس با ما</div>
-      <div class="card" style="display:flex;gap:16px;align-items:flex-start">
-        <div style="flex:1">
-          <form onsubmit="event.preventDefault(); alert('دمو: پیام ارسال شد');">
-            <div style="margin-bottom:10px">
-              <label class="mini">نام</label><br>
-              <input required style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee" placeholder="نام شما" />
-            </div>
-            <div style="margin-bottom:10px">
-              <label class="mini">ایمیل</label><br>
-              <input required type="email" style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee" placeholder="you@example.com" />
-            </div>
-            <div style="margin-bottom:10px">
-              <label class="mini">پیام</label><br>
-              <textarea required style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee" rows="4" placeholder="متن پیام"></textarea>
-            </div>
-            <div><button class="btn" type="submit">ارسال پیام</button></div>
-          </form>
-        </div>
-
-        <div style="width:260px">
-          <div class="mini">ایمیل: hello@hopeplatform.com</div>
-          <div class="mini" style="margin-top:6px">مکان: ونکوور • دبی • تهران</div>
-          <div style="margin-top:12px">
-            <img src="https://images.unsplash.com/photo-1505765052076-1b4c1b1c1c1c?q=80&w=600&auto=format&fit=crop" alt="ونکوور" style="width:100%;border-radius:8px;object-fit:cover;height:120px" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-      <div>© 2025 Hope Platform</div>
-      <div class="mini">پلتفرم اتصال خریداران جهانی به بافندگان محلی — اصالت در هر گره</div>
-      <div class="mini">تماس: hello@hopeplatform.com</div>
+  <!-- Right column (sidebar) -->
+  <aside>
+    <!-- Quick CTA -->
+    <div class="card" style="margin-bottom:16px;text-align:center">
+      <div style="font-size:14px;color:var(--muted)">دوره‌های آموزشی حضوری</div>
+      <h3 style="margin:8px 0">4 هفته — ونکوور</h3>
+      <div style="color:var(--muted)">$300 • ظرفیت محدود</div>
+      <div style="margin-top:12px"><a class="btn" href="#education">رزرو کنید</a></div>
     </div>
-  </footer>
 
-  <!-- Simple JS for demo interactions -->
-  <script>
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', function(e){
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
-      });
-    });
-  </script>
-</body>
-</html>
+    <!-- Story spotlight -->
+    <div class="card">
+      <div class="section-title">داستان یک فرش</div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <img src="https://images.unsplash.com/photo-1592496001028-1c4a9a9f30a1?q=80&w=300&auto=format&fit=crop" alt="detail" style="width:110px;height:80px;object-fit:cover;border-radius:8px" />
+        <div>
+          <h4 style="margin:0">قالی گلدارِ ماهان</h4>
+          <p class="mini" style="color:var(--muted);margin-top:6px">یک طرح سنتی ۶ ماهه، با داستان خانوادهٔ بافنده و استفاده از رنگ‌های محلی.</p>
+        </div>
+      </div>
+      <div style="margin-top:12px"><a class="btn ghost" id="open-story">مشاهده داستان
